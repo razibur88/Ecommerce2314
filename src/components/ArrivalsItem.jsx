@@ -5,9 +5,8 @@ import { TfiReload } from "react-icons/tfi";
 
 
 const ArrivalsItem = ({item}) => {
-    console.log(item);
   return (
-    <div className='sm:w-full lg:w-[24%] py-5'>
+    <div className='sm:w-full lg:w-[96%] py-5'>
         <div className="relative group overflow-hidden">
             <img src={item.thumbnail} className='h-[350px]' alt="" />
             <div className="bg-white absolute left-0 h-[130px] duration-300 ease-in-out bottom-[-120px] w-full group-hover:bottom-[0px] flex items-center justify-end">
