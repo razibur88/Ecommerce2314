@@ -16,7 +16,7 @@ const Header = () => {
                 <img src={Logo} alt="logo" />
             </div>
             <div className="w-3/4">
-                <ul className={`lg:flex justify-center gap-x-10 absolute lg:static duration-700 ease-out ${show == true ? "bg-[gray] top-[50px] left-0 w-full" : "top-[50px] left-[-200px]" }`}>
+                <ul className={`lg:flex justify-center gap-x-10 absolute z-50 lg:static duration-700 ease-out ${show == true ? "bg-[gray] top-[50px] left-0 w-full" : "top-[50px] left-[-200px]" }`}>
                     <li className='font-sans text-[16px] lg:text-[#767676] text-[white] hover:text-[#262626]'>
                     <Link to="/">Home</Link>
                     </li>

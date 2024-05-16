@@ -4,6 +4,7 @@ import ArrivalsItem from './ArrivalsItem'
 import { apiData } from './ContextApi'
 import Slider from "react-slick";
 import { GoChevronRight,GoChevronLeft  } from "react-icons/go";
+import { Link } from 'react-router-dom';
 
 
 function SampleNextArrow(props) {
@@ -49,7 +50,9 @@ const Newarrivals = () => {
      
             <Slider {...settings}>
             {data.map((item)=>(
-                <ArrivalsItem item={item}/>
+               <Link to="/product">
+                 <ArrivalsItem item={item}/>
+               </Link>
             ))}
             </Slider>
     </Container>
