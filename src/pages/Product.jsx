@@ -1,12 +1,9 @@
-import React, { useContext, useState } from 'react'
-import Container from '../components/Container'
-import Flex from '../components/Flex'
-import { apiData } from '../components/ContextApi'
-import { FaHeart } from "react-icons/fa";
-import { TfiReload } from "react-icons/tfi";
-import { Link } from 'react-router-dom';
-import Post from '../components/pagination/Post';
+import React, { useContext, useState } from 'react';
+import Container from '../components/Container';
+import { apiData } from '../components/ContextApi';
+import Flex from '../components/Flex';
 import PaginationArea from '../components/pagination/PaginationArea';
+import Post from '../components/pagination/Post';
 
 const Product = () => {
     let data = useContext(apiData)
@@ -29,7 +26,17 @@ const Product = () => {
         setCurrentpage(pageNumber + 1);
     }
 
+    let next = () =>{
+        if(currentPage < pageNumber.length){
+            setCurrentpage((state) => state + 1)
+        }
+    }
 
+    let prev = () =>{
+        if(currentPage > 1){
+            setCurrentpage((state) => state -1)
+        }
+    }
 
     return (
         <section>
@@ -44,7 +51,7 @@ const Product = () => {
                         
                         </div>
                         <div className="text-end">
-                            <PaginationArea pageNumber={pageNumber} paginate={paginate}/>
+                            <PaginationArea pageNumber={pageNumber} paginate={paginate} currentPage={currentPage} next={next} prev={prev}/>
                         </div>
                         
                     </div>
