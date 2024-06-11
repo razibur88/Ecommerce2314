@@ -1,13 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Container from './Container'
-import Flex from './Flex'
+import React, { useEffect, useRef, useState } from 'react';
+import { FaCartPlus, FaSearch, FaUser } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
-import { FaSearch, FaUser, FaCartPlus } from "react-icons/fa";
 import { MdArrowDropDown } from "react-icons/md";
-import CartImg from "../assets/cart.png"
 import { RxCross2 } from "react-icons/rx";
+import { useSelector } from "react-redux";
+import CartImg from "../assets/cart.png";
+import Container from './Container';
+import Flex from './Flex';
 
 const Navbar = () => {
+    let data = useSelector((state)=> state.product.cartItem)
     let [cartShow, setCartShow] = useState(false)
     let [usercartShow, setUsercartShow] = useState(false)
     let [userShow, setuserShow] = useState(false)
@@ -73,7 +75,14 @@ const Navbar = () => {
                             <MdArrowDropDown />
                         </div>
                         <div ref={userref} className="">
-                            <FaCartPlus />
+                            <div className="relative">
+                                <FaCartPlus />
+                                {data.length > 0 ? <div className="absolute h-[20px] w-[20px] bg-[#767676] left-[10px] top-[-15px] rounded-full text-center text-white">
+                                {data.length}
+                                </div> : "" }
+                                
+                            </div>
+                            {/* {data.length} */}
                         </div>
                     </div>
                     {userShow &&
