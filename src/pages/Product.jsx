@@ -51,9 +51,9 @@ const Product = () => {
     return (
         <section>
             <Container>
-                <Flex>
-                    <div className="w-[20%]">
-                    <div className="mt-16">
+                <div className='lg:flex'>
+                    <div className="lg:w-[20%] w-full ">
+                    <div className="mt-16 pl-5">
                 <h3 onClick={() => setCatShow(!catshow)} className='font-sans lg:text-[20px] text-[12px] font-bold text-[#262626] flex justify-between items-center cursor-pointer'>Shop by Category <p>{catshow == true ? <FaCaretUp /> : <FaCaretDown />}</p></h3>
                 {catshow &&
                   <ul>
@@ -65,7 +65,7 @@ const Product = () => {
                 }
               </div>
                     </div>
-                    <div className="w-[80%]">
+                    <div className="lg:w-[80%] w-full">
                         <div className="flex justify-between flex-wrap">
                             <Post allData={allData} categorySearchFilter={categorySearchFilter}/>
                         
@@ -75,7 +75,7 @@ const Product = () => {
                         </div>
                         
                     </div>
-                </Flex>
+                </div>
             </Container>
         </section>
     )
