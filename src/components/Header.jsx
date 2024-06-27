@@ -23,8 +23,12 @@ const Header = () => {
                     <li className='font-sans text-[16px] lg:text-[#767676] text-[white] hover:text-[#262626]'>
                         <Link to="/product">Shop</Link>
                     </li>
-                    <li className='font-sans text-[16px] lg:text-[#767676] text-[white] hover:text-[#262626]'>About</li>
-                    <li className='font-sans text-[16px] lg:text-[#767676] text-[white] hover:text-[#262626]'>Contacts</li>
+                    <li  className='font-sans text-[16px] lg:text-[#767676] text-[white] hover:text-[#262626]'>
+                            <Link to="/about">About</Link>
+                    </li>
+                    <li className='font-sans text-[16px] lg:text-[#767676] text-[white] hover:text-[#262626]'>
+                        <Link to="/contact">Contacts</Link>
+                    </li>
                     <li className='font-sans text-[16px] lg:text-[#767676] text-[white] hover:text-[#262626]'>Journal</li>
                 </ul>
             </div>
