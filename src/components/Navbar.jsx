@@ -3,11 +3,14 @@ import { FaCartPlus, FaSearch, FaUser } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
 import { MdArrowDropDown } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Container from "./Container";
 import { apiData } from "./ContextApi";
 import Flex from "./Flex";
+import { removeProduct } from "./slice/productSlice";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
   let info = useContext(apiData);
@@ -21,7 +24,9 @@ const Navbar = () => {
   let cartref = useRef();
   let userref = useRef();
   let userAccref = useRef();
+  let userthakbe = useRef();
   let navigate = useNavigate();
+  let dispatch = useDispatch()
 
   useEffect(() => {
     document.addEventListener("click", (e) => {
@@ -39,6 +44,9 @@ const Navbar = () => {
         setuserShow(!userShow);
       } else {
         setuserShow(false);
+      }
+      if(userthakbe.current.contains(e.target)){
+        setUsercartShow(true);
       }
     });
 
@@ -85,6 +93,18 @@ const Navbar = () => {
         console.log(e.key);
     }
   };
+
+  let handleDelete = (index) =>{
+    dispatch(removeProduct(index))
+  }
+
+  let handleToNai = () =>{
+    toast("go to cart page")
+    setUsercartShow(false);
+    setTimeout(()=>{
+      navigate("/cart")
+    },1000)
+  }
 
   return (
     <nav className="bg-[#F5F5F3] py-4">
@@ -181,6 +201,18 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
+            <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
             {userShow && (
               <div className="absolute z-50 top-[30px] right-0 w-[300px] bg-[#262626] py-3 px-6">
                 <ul className="font-sans text-[16px] font-normal text-[#FFFFFFB2]">
@@ -197,9 +229,10 @@ const Navbar = () => {
               </div>
             )}
 
+            <div ref={userthakbe} className="">
             {usercartShow && (
               <div className="w-[360px] z-50 absolute bg-[#F5F5F3] top-[50px] right-0">
-                {data.map((item) => (
+                {data.map((item,index) => (
                   <div className="py-3 ">
                     <div className="flex justify-around items-center">
                       <div className="">
@@ -213,25 +246,22 @@ const Navbar = () => {
                         <h3>{item.title}</h3>
                         <h5>${item.price}</h5>
                       </div>
-                      <div className="">
+                      <div onClick={()=>handleDelete(index)} className="">
                         <RxCross2 />
                       </div>
                     </div>
                   </div>
                 ))}
+                {data.length > 0 &&
                 <div className="">
-                  <h3 className="pl-4 py-3">
-                    Subtotal: <span>$44.00</span>
-                  </h3>
-                </div>
+                
                 <div className="flex justify-around">
                   <div className="">
-                    <Link
-                      to="/cart"
+                    <a onClick={handleToNai}
                       className="w-[148px] h-[50px] border-2 border-[#262626] inline-block text-center leading-[50px]"
                     >
                       View Cart
-                    </Link>
+                    </a>
                   </div>
                   <div className="">
                     <a
@@ -242,8 +272,11 @@ const Navbar = () => {
                     </a>
                   </div>
                 </div>
+                </div>
+              }
               </div>
             )}
+            </div>
           </div>
         </Flex>
       </Container>

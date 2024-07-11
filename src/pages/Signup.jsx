@@ -21,6 +21,7 @@ const Signup = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [pshow, setPshow] = useState(false);
+  const validPassword = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$');
 
   let handleFirstName = (e) => {
     setFirstName(e.target.value);
@@ -35,17 +36,10 @@ const Signup = () => {
   };
 
   let handleSubmit = (e) => {
-    if (email) {
-    } else if (
-      email.match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )
-    ) {
-      console.log(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-    } else {
-      console.log("nai");
+    if(validPassword.test(password)){
+      console.log("ami ok");
+    }else{
+      console.log("ami nai");
     }
 
     // createUserWithEmailAndPassword(auth, email, password)

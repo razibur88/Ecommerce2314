@@ -12,11 +12,14 @@ import Post from '../components/pagination/Post';
 const Product = () => {
   let data = useContext(apiData)
   let [currentPage, setCurrentpage] = useState(1)
-  let [perPage, setPerPage] = useState(18)
+  let [perPage, setPerPage] = useState(9)
   let [catshow, setCatShow] = useState(false)
   let [category, setCategory] = useState([])
   let [categorySearchFilter, setCategorySearchFilter] = useState([])
   let [multiList, setMultiList] = useState('')
+  let [lowprice, setLowprice] = useState("")
+  let [highprice, setHighprice] = useState("")
+  let [filterPrice, setFilterPrice] = useState([])
 
 
   let lastPage = currentPage * perPage
@@ -57,6 +60,14 @@ const Product = () => {
   let handleList = () => {
     setMultiList("activeList");
   }
+  let handlePrice = (value) =>{
+    setLowprice(value.low)
+    setHighprice(value.high)
+    let priceFilter = data.filter((item)=>item.price > value.low && item.price < value.high)
+    setFilterPrice(priceFilter);
+  }
+
+
   return (
     <section>
       <Container>
@@ -73,19 +84,19 @@ const Product = () => {
                 </ul>
               }
             </div>
+            <div className="mt-16 pl-5">
+              <h3 className='font-sans lg:text-[20px] text-[12px] font-bold text-[#262626] flex justify-between items-center cursor-pointer'>Shop by Price</h3>
+              
+                <ul>
+                    <li onClick={()=>handlePrice({low:0, high:10})} className='font-sans lg:text-[16px] text-[12px] font-normal text-[#767676] lg:py-5 py-2 border-b-2 border-[#F0F0F0] capitalize'>Price $0- $10</li>
+                    <li onClick={()=>handlePrice({low:10, high:20})} className='font-sans lg:text-[16px] text-[12px] font-normal text-[#767676] lg:py-5 py-2 border-b-2 border-[#F0F0F0] capitalize'>Price $10- $20</li>
+             
+                </ul>
+              
+            </div>
           </div>
-          {/* <div className="lg:pt-[50px] pt-3">
-                <h3 onClick={() => setPriShow(!prishow)} className='font-sans lg:text-[20px] text-[12px] font-bold text-[#262626] flex justify-between items-center cursor-pointer'>Shop by Price <p>{prishow == true ? <FaCaretUp /> : <FaCaretDown />}</p></h3>
-                {prishow &&
-                  <ul>
-                    <li className='font-sans lg:text-[16px] text-[12px] font-normal text-[#767676] lg:py-5 py-2 border-b-2 border-[#F0F0F0]'>$0.00 - $9.99</li>
-                    <li className='font-sans lg:text-[16px] text-[12px] font-normal text-[#767676] lg:py-5 py-2 border-b-2 border-[#F0F0F0]'>$10.00 - $19.99</li>
-                    <li className='font-sans lg:text-[16px] text-[12px] font-normal text-[#767676] lg:py-5 py-2 border-b-2 border-[#F0F0F0]'>$20.00 - $29.99</li>
-                    <li className='font-sans lg:text-[16px] text-[12px] font-normal text-[#767676] lg:py-5 py-2 border-b-2 border-[#F0F0F0]'>$30.00 - $39.99</li>
-                    <li className='font-sans lg:text-[16px] text-[12px] font-normal text-[#767676] lg:py-5 py-2 border-b-2 border-[#F0F0F0]'>$40.00 - $69.99</li>
-                  </ul>
-                }
-              </div> */}
+          
+          
           <div className="lg:w-[80%] w-full">
             <div className="lg:flex justify-between pt-[10px] mt-[50px] pl-10">
               <div className="flex gap-x-5 lg:justify-normal justify-center lg:w-[30%] w-100%">
@@ -112,7 +123,7 @@ const Product = () => {
               </div>
             </div>
 
-            <Post allData={allData} categorySearchFilter={categorySearchFilter} multiList={multiList} />
+            <Post filterPrice={filterPrice} allData={allData} categorySearchFilter={categorySearchFilter} multiList={multiList} />
 
 
             <div className="text-end">
